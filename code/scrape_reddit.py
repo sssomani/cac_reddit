@@ -111,7 +111,7 @@ if __name__ == '__main__':
     """
     
     parser = argparse.ArgumentParser()
-    parser.add_argument('output_file_path', type='str', default='data/raw/cac_db.xlsx', help='Path to save dataset')
+    parser.add_argument('output_file_path', type='str', default='data/cac_db.xlsx', help='Path to save dataset')
     args = parser.parse_args()
 
     cac_db_strings = ['coronary artery calcium', 'coronary calcium', 'cac score', 'calcium score', 'heart scan']
