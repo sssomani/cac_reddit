@@ -79,6 +79,9 @@ class SentimentAnalysis():
         sentiments.index = self.df.index
         self.sentiments = self.df.join(sentiments)
 
+        # Save
+        self.sentiments.to_excel(self.config['output'])
+
     @staticmethod
     def find_string_sentiment(sentiment_model, text):
         
@@ -106,20 +109,16 @@ class SentimentAnalysis():
         
         return np.mean(sents, axis=0)
     
-    def save_sentiments(self):
-        """
-        Save the sentiment results as an Excel file from the self.sentiments object.
-        """
-        raise NotImplementedError
-
 if __name__ == '__main__':
     
     # Enter input data via argparse.
     parser = argparse.ArgumentParser()
-    parser.add_argument('data', type='str', default='data/raw/cac_db.xlsx', help='Path to dataset')
+    parser.add_argument('data', type='str', default='data/cac_db.xlsx', help='Path to dataset')
+    parser.add_argument('output', type='str', default='data/topic_model_res.xlsx', help='Path to save sentiment analysis results.')
     args = parser.parse_args()
 
     config['data'] = args.data
+    config['output'] = args.output
 
     sentiment_analysis = SentimentAnalysis(config)
     sentiment_analysis.perform_sentiment_analysis()
